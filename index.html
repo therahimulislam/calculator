@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Modern Premium Calculator</title>
+    <meta name="description" content="A powerful, beautifully designed calculator with scientific mode and history.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Inter:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Gradient Elements for Glassmorphism Context -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+
+    <div class="app-container">
+        <main class="calculator glass-panel">
+            <!-- Header section: Theme Toggle, Sci Toggle, and History Toggle -->
+            <header class="calc-header">
+                <button id="theme-btn" class="icon-btn" aria-label="Toggle Theme">
+                    <i class="fa-solid fa-sun" id="theme-icon"></i>
+                </button>
+                <div class="right-controls">
+                    <button id="sci-btn" class="text-btn outline">SCI</button>
+                    <button id="history-btn" class="icon-btn" aria-label="Calculation History">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Display section -->
+            <section class="display-area">
+                <div class="history-preview" id="expression-display"></div>
+                <div class="main-display">
+                    <div id="result-preview" class="result-preview"></div>
+                    <div id="current-display" class="current-value">0</div>
+                </div>
+                <button id="copy-btn" class="icon-btn tiny-btn" title="Copy Result">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
+            </section>
+
+            <!-- Keypad section -->
+            <section class="keypad">
+                <!-- Scientific panel, initially hidden -->
+                <div id="scientific-panel" class="sci-grid hidden">
+                    <button class="btn btn-sci has-ripple" data-action="func" data-value="sin(">sin</button>
+                    <button class="btn btn-sci has-ripple" data-action="func" data-value="cos(">cos</button>
+                    <button class="btn btn-sci has-ripple" data-action="func" data-value="tan(">tan</button>
+                    <button class="btn btn-sci has-ripple" data-action="func" data-value="log(">log</button>
+                    <button class="btn btn-sci has-ripple" data-action="func" data-value="ln(">ln</button>
+                    <button class="btn btn-sci has-ripple" data-action="operator" data-value="^">xʸ</button>
+                    <button class="btn btn-sci has-ripple" data-action="func" data-value="√(">√</button>
+                    <button class="btn btn-sci has-ripple" data-action="operator" data-value="!">x!</button>
+                    <button class="btn btn-sci has-ripple" data-action="constant" data-value="π">π</button>
+                    <button class="btn btn-sci has-ripple" data-action="constant" data-value="e">e</button>
+                </div>
+
+                <!-- Main basic panel -->
+                <div class="main-grid">
+                    <!-- Row 1 -->
+                    <button class="btn btn-action has-ripple" data-action="clear" id="ac-btn">AC</button>
+                    <button class="btn btn-action has-ripple" data-action="parentheses">( )</button>
+                    <button class="btn btn-operator has-ripple" data-action="operator" data-value="%">%</button>
+                    <button class="btn btn-operator has-ripple" data-action="operator" data-value="÷">÷</button>
+
+                    <!-- Row 2 -->
+                    <button class="btn btn-number has-ripple" data-value="7">7</button>
+                    <button class="btn btn-number has-ripple" data-value="8">8</button>
+                    <button class="btn btn-number has-ripple" data-value="9">9</button>
+                    <button class="btn btn-operator has-ripple" data-action="operator" data-value="×">×</button>
+
+                    <!-- Row 3 -->
+                    <button class="btn btn-number has-ripple" data-value="4">4</button>
+                    <button class="btn btn-number has-ripple" data-value="5">5</button>
+                    <button class="btn btn-number has-ripple" data-value="6">6</button>
+                    <button class="btn btn-operator has-ripple" data-action="operator" data-value="-">−</button>
+
+                    <!-- Row 4 -->
+                    <button class="btn btn-number has-ripple" data-value="1">1</button>
+                    <button class="btn btn-number has-ripple" data-value="2">2</button>
+                    <button class="btn btn-number has-ripple" data-value="3">3</button>
+                    <button class="btn btn-operator has-ripple" data-action="operator" data-value="+">+</button>
+
+                    <!-- Row 5 -->
+                    <button class="btn btn-number has-ripple zero-btn" data-value="0">0</button>
+                    <button class="btn btn-number has-ripple" data-value=".">.</button>
+                    <button class="btn btn-action has-ripple" data-action="delete" id="del-btn">
+                        <i class="fa-solid fa-delete-left"></i>
+                    </button>
+                    <button class="btn btn-equals has-ripple" data-action="calculate">=</button>
+                </div>
+            </section>
+            
+            <!-- History Overlay panel -->
+            <aside id="history-panel" class="history-panel hidden">
+                <header class="history-header">
+                    <h2>History</h2>
+                    <div class="hist-controls">
+                        <button id="clear-history-btn" class="icon-btn" aria-label="Clear History" title="Clear History">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                        <button class="icon-btn" id="close-history-btn" aria-label="Close History">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </header>
+                <div id="history-list" class="history-list">
+                    <!-- History items will be injected here via JS -->
+                    <div class="empty-history">
+                        <div class="clock-icon"><i class="fa-regular fa-clock"></i></div>
+                        <p>No history yet</p>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">
+        <i class="fa-solid fa-check-circle"></i>
+        <span>Copied to clipboard</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
