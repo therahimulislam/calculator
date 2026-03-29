@@ -87,7 +87,7 @@ body {
     background-color: var(--bg-color);
     font-family: 'Inter', -apple-system, sans-serif;
     color: var(--text-primary);
-    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -153,11 +153,12 @@ body {
 .app-container {
     width: 100%;
     max-width: 420px;
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 1rem;
+    padding-bottom: 4rem;
     position: relative;
     z-index: 10;
 }
@@ -166,6 +167,7 @@ body {
     .app-container {
         height: auto;
         padding: 2rem;
+        padding-bottom: 4rem;
     }
 }
 
@@ -632,5 +634,6 @@ body {
     }
     .app-container {
         padding: 0.5rem;
+        padding-bottom: 4rem;
     }
 }
